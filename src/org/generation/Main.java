@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.concurrent.*;
 
 public class Main {
+    
     // Diccionario ampliado con pares palabra en español y su traducción en inglés
     private static final String[][] PALABRAS = {
             {"hola", "hello"}, {"adios", "goodbye"}, {"casa", "house"},
@@ -21,8 +22,10 @@ public class Main {
     public static void main(String[] args) {
         // Crear HashMap para almacenar el diccionario Español-Inglés
         HashMap<String, String> diccionario = new HashMap<>();
+        
         // Scanner para leer entrada del usuario
         Scanner scanner = new Scanner(System.in);
+        
         // Random para operaciones aleatorias (aunque no se usa directamente aquí)
         Random random = new Random();
 
@@ -71,8 +74,10 @@ public class Main {
 
         // Obtener lista de todas las palabras en español
         List<String> palabrasEspañol = new ArrayList<>(diccionario.keySet());
+        
         // Mezclar la lista para selección aleatoria
         Collections.shuffle(palabrasEspañol);
+        
         // Seleccionar la cantidad de palabras según dificultad
         List<String> seleccionadas = palabrasEspañol.subList(0, numPalabras);
 
@@ -97,14 +102,18 @@ public class Main {
                 // Si se agotó el tiempo, cuenta como incorrecta y muestra respuesta correcta
                 System.out.println("Tiempo agotado! La respuesta correcta es: " + diccionario.get(palabra));
                 incorrectas++;
-            } else {
+            } 
+            else 
+            {
                 // Normalizar respuesta para comparación (minúsculas y sin espacios)
                 respuesta = respuesta.toLowerCase().trim();
                 if (respuesta.equals(diccionario.get(palabra))) {
                     System.out.println("✓ ¡Correcto!");
                     correctas++;
                     puntuacion += PUNTOS_POR_ACIERTO;
-                } else {
+                } 
+                else 
+                {
                     System.out.println("✗ Incorrecto. La respuesta correcta es: " + diccionario.get(palabra));
                     incorrectas++;
                 }
@@ -134,15 +143,18 @@ public class Main {
         try {
             // Espera la entrada hasta el tiempo límite
             return future.get(segundos, TimeUnit.SECONDS);
-        } catch (TimeoutException e) {
+        } 
+        catch (TimeoutException e) {
             // Si se agota el tiempo, cancela la tarea y retorna null
             future.cancel(true);
             return null;
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
             // En caso de otras excepciones, también retorna null
             return null;
-        } finally {
-            // Apaga el executor para liberar recursos
+        } 
+        finally {
+            // Apaga el egecutor para liberar recursos
             executor.shutdownNow();
         }
     }
